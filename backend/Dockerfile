@@ -1,11 +1,13 @@
-FROM alpine:3.19
+FROM ubuntu:22.04
 
-RUN apk add --no-cache g++
+RUN apt-get update && apt-get install -y g++
 
 WORKDIR /app
 
-COPY . .
+COPY app.cpp .
 
-RUN g++ backend.cpp -o backend
+RUN g++ app.cpp -o app
 
-CMD ["./backend"]
+EXPOSE 8080
+
+CMD ["./app"]
